@@ -439,7 +439,7 @@ Implement the function that takes an integer value and returns the next 'Int'.
   function body with the proper implementation.
 -}
 next :: Int -> Int
-next x = succ x
+next = succ
 
 {- |
 After you've implemented the function (or even during the implementation), you
@@ -513,7 +513,7 @@ branches because it is an expression and it must always return some value.
 closestToZero :: Int -> Int -> Int
 closestToZero 0 _ = 0
 closestToZero _ 0 = 0
-closestToZero x y = if (abs x) > (abs y) then y else x
+closestToZero x y = if abs x > abs y then y else x
 
 
 {- |
@@ -674,7 +674,7 @@ aren't ready for this boss yet!
 -}
 
 firstDigit :: Integral t => t -> t
-firstDigit n = 
+firstDigit n =
   let m = abs n
   in
     if m < 10 then mod m 10 else firstDigit $ div m 10
