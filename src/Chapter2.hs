@@ -518,10 +518,8 @@ True
 False
 -}
 isThird42 :: [Int] -> Bool
-isThird42 [] = False
-isThird42 [_] = False
-isThird42 [_, _] = False
-isThird42 (_:_:x:_) = x == 42
+isThird42 (_:_:42:_) = True
+isThird42 _ = False
 
 
 {- |
@@ -627,7 +625,7 @@ Implement a function that duplicates each element of the list
 -}
 duplicate :: [a] -> [a]
 duplicate [] = []
-duplicate (x:xs) = [x, x] ++ duplicate xs
+duplicate (x:xs) = x : x : duplicate xs
 
 
 {- |
@@ -644,9 +642,9 @@ Write a function that takes elements of a list only on even positions.
 -}
 takeEven :: [a] -> [a]
 takeEven lst =
-  let lst' = zip [(1 :: Int)..] lst
+  let lst' = zip [(0 :: Int)..] lst
   in
-    [x | (i, x) <- lst', odd i ]
+    [x | (i, x) <- lst', even i ]
 
 {- |
 =🛡= Higher-order functions
@@ -753,7 +751,7 @@ value of the element itself
 🕯 HINT: Use combination of 'map' and 'replicate'
 -}
 smartReplicate :: [Int] -> [Int]
-smartReplicate l = foldl (++) [] $ map (\x -> replicate x x) l
+smartReplicate = concatMap (\x -> replicate x x)
 
 {- |
 =⚔️= Task 9
@@ -767,7 +765,7 @@ the list with only those lists that contain a passed element.
 🕯 HINT: Use the 'elem' function to check whether an element belongs to a list
 -}
 contains :: Int -> [[Int]] -> [[Int]]
-contains x lst = filter (elem x) lst
+contains x = filter $ elem x
 
 
 {- |
@@ -871,6 +869,7 @@ list.
 🕯 HINT: Use the 'cycle' function
 -}
 rotate :: Int -> [a] -> [a]
+rotate _ [] = []
 rotate x lst
   | x > 0 = take (length lst) $ drop x $ cycle lst
   | x == 0 = lst
@@ -891,8 +890,11 @@ and reverses it.
   cheating!
 -}
 rewind :: [a] -> [a]
-rewind [] = []
-rewind (x:xs) = (rewind xs) ++ [x]
+rewind xs = go [] xs
+  where
+    go :: [a] -> [a] -> [a]
+    go acc [] = acc
+    go acc (x:ys) = go (x : acc) ys
 
 
 {-
