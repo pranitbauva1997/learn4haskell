@@ -543,7 +543,7 @@ value after "=" where the condition is true.
 
 ♫ NOTE: It is essential to have the same indentation before each branch "|"!
   Remember, that Haskell is indentation- and layout-sensitive language.
-m
+
 Casual reminder about adding top-level type signatures for all functions :)
 -}
 
@@ -649,8 +649,7 @@ sumLast2 n =
   let
     m = abs n
     lastTwo = mod m 100
-    left = mod lastTwo 10
-    right = div lastTwo 10
+    (right, left) = divMod lastTwo 10
   in
     left + right
 
@@ -677,7 +676,7 @@ firstDigit :: Integral t => t -> t
 firstDigit n =
   let m = abs n
   in
-    if m < 10 then mod m 10 else firstDigit $ div m 10
+    if m < 10 then m else firstDigit $ div m 10
 
 
 {-
