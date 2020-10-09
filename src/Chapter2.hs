@@ -689,7 +689,7 @@ specify space-separated arguments. Instead of the "=" in the ordinary
 function body, you should write "->" and then you can use these
 arguments and all variables in scope inside the lambda-body.
 
-There are equal:
+These are equal:
 
 @
 foo a b = a + b
@@ -898,6 +898,6 @@ rewind xs = go [] xs
 
 
 {-
-You did it! Now it is time to the open pull request with your changes
+You did it! Now it is time to open pull request with your changes
 and summon @vrom911 and @chshersh for the review!
 -}
